@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit run BMWapp.py
+web: sh setup.sh && streamlit run bmwapp.py
