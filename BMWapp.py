@@ -3,15 +3,16 @@ import numpy as np
 import pandas as pd
 import pickle
 from sklearn.tree import DecisionTreeRegressor
-
 st.title("PRÉDICATEUR DE PRIX DE VOITURE BMW")
 # load model
-@st.cache
+#model = DecisionTreeRegressor()
 model = pickle.load(open("car_price_predictor_model.pkl",'rb'))
-
+#model = joblib.load("C:/Users/Administrateur/Desktop/car_Api/car_price_predictor_model.pkl")
+#Caching the model for faster loading
+#@st.cache
 
 with st.sidebar:
-    st.subheader('Car Specs to Predict Price')
+    st.subheader('Spécifications de la voiture pour prévoir le prix')
 
 year = st.sidebar.number_input("Model year:",min_value=1996, max_value=2020, value=1996, step=1)
 mileage = st.sidebar.number_input("km Traveled:",min_value=1000, max_value=200000, value=1000, step=5000)
@@ -42,16 +43,16 @@ input_data = {
         "transmission": transmission,
         "engineSize": engineSize
     }
-
+#my_dict = {"fuelType":fuelType, "price":price, "year":year, "mileage":mileage, "engineSize":engineSize, "transmission":transmission}
 df = pd.DataFrame.from_dict([input_data])
 
 cols = {
-    "year": "Model year",
-    "mileage": "km Traveled",
-    "price": "price of purchase",
-    "fuelType": "Fuel Type",
+    "year": "Année de la voiture",
+    "mileage": "Km parcourus",
+    "price": "Prix d'achat",
+    "fuelType": "Type de carburant",
     "transmission": "Transmission",
-    "engineSize": "Engine Size"
+    "engineSize": "La taille du moteur"
 }
 
 df_show = df.copy()
@@ -59,11 +60,11 @@ df_show.rename(columns = cols, inplace = True)
 st.write("Spécifications sélectionnées: \n")
 st.table(df_show)
 
-if st.button("Predict"):
+if st.button("Prédiction"):
     pred = model.predict(df)
     col1, col2 = st.columns(2)
-    col1.write(f"La valeur estimée du prix de la voiture est de £ :")
-    col2.write(pred[0].astype(int))
+    col1.write(f"La valeur estimée du prix de la voiture est de {pred[0].astype(int)} £")
+    #col2.write(pred[0].astype(int))
 
 
 st.write("\n\n")
