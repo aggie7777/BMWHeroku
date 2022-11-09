@@ -2,15 +2,7 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import pickle
-
 from sklearn.tree import DecisionTreeRegressor
-html_temp = """
-<div style="background-color:yellow;padding:1.5px">
-<h1 style="color:black;text-align:center;">Used Car Price Prediction</h1>
-</div><br>"""
-st.markdown(html_temp, unsafe_allow_html=True)
-
-st.write("\n\n"*2)
 
 # load model
 @st.cache
