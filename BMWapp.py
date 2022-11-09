@@ -4,6 +4,7 @@ import pandas as pd
 import pickle
 from sklearn.tree import DecisionTreeRegressor
 
+st.title("PRÉDICATEUR DE PRIX DE VOITURE BMW")
 # load model
 @st.cache
 model = pickle.load(open("car_price_predictor_model.pkl",'rb'))
